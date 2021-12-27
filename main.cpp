@@ -219,9 +219,9 @@ void triangle(int Ax, int Ay, int Bx, int By, int Cx, int Cy)
 }
 void draw_polygon(int polygon[2][6]) {
     for (int i = 0; i < 5; i++) {
-        drawLineDDA(polygon[0][i], polygon[1][i], polygon[0][i + 1], polygon[1][i + 1], RGB(227, 255, 70));
+        drawLineDDA(polygon[0][i], polygon[1][i], polygon[0][i + 1], polygon[1][i + 1], RGB(255, 255, 50));
     }
-    drawLineDDA(polygon[0][0], polygon[1][0], polygon[0][5], polygon[1][5], RGB(227, 255, 70));
+    drawLineDDA(polygon[0][0], polygon[1][0], polygon[0][5], polygon[1][5], RGB(255, 255, 50));
 }
 
 COLORREF getPixel(int x, int y) {
@@ -317,7 +317,8 @@ int main()
     int y1 = 20;
     int x2 = 45;
     int y2 = 40;
-    int polygon[2][6] = {10, 50, 90, 70, 45, 5, 10, 40, 20, 90, 70, 110 };
+    int polygon[2][6] = {50,80,80,50,20,20,
+                         0,30,80,100,80,30 };
 
     draw_grid(grid_width, grid_height, grid_size);
     SetConsoleCursorPosition(handleWindow, { 0,static_cast<short>(grid_size * grid_height / 16) });
@@ -334,47 +335,49 @@ int main()
     <<"9. Exit" << '\n';
 
     int ans = 0;
-    std::cin >> ans;
-    switch (ans){
+        std::cin >> ans;
+        switch (ans){
             default:{std::cout<<"Not an option"<<'\n';break;}
             case 1:{
                 draw_grid(grid_width, grid_height, grid_size);
                 SetConsoleCursorPosition(handleWindow, { 0,static_cast<short>(grid_size * grid_height / 16) });
                 break;}
-        case 2:{
-            triangle(x, y, x1, y1, x2, y2);
-            drawLineDDA(x, y, x1, y1);
-            drawLineDDA(x1, y1, x2, y2);
-            drawLineDDA(x, y, x2, y2);
-            break;}
-        case 3:{
-            drawLineDDA(x + 10, y, x1 + 10, y1)
-            ;break;}
-        case 4:{
-            for (int i = 0; i < 360; i = i + 10) {
-                line_bresenham(30, 50, (30 + 30 * cos(PI / 180 * i)), (50 + 30 * sin(PI / 180 * i)), RGB(255, i, i));
-            }
-            break;}
-        case 5:{
-            for (int i = 0; i < 360; i = i + 10) {
-                drawLineDDA(100, 50, (100 + 30 * cos(PI / 180 * i)), (50 + 30 * sin(PI / 180 * i)), RGB(i, 255, i));
-            }
-            break;}
-        case 6:{
-            circle_bresenham(160, 50, 25, RGB(0, 0, 255));
-            break;}
-        case 7:{
-            draw_polygon(polygon);
-            Fill(20, 20, RGB(227, 255, 70), RGB(253, 215, 215));
-            break;}
-        case 8:{
-            draw_polygon(polygon);
-            fill_seed(20, 20, RGB(227, 255, 70), RGB(253, 215, 215));
-            break;}
-        case 9:{break;}
+            case 2:{
+                triangle(x, y, x1, y1, x2, y2);
+                drawLineDDA(x, y, x1, y1);
+                drawLineDDA(x1, y1, x2, y2);
+                drawLineDDA(x, y, x2, y2);
+                break;}
+            case 3:{
+                drawLineDDA(x + 10, y, x1 + 10, y1)
+                        ;break;}
+            case 4:{
+                for (int i = 0; i < 360; i = i + 10) {
+                    line_bresenham(30, 50, (30 + 30 * cos(PI / 180 * i)), (50 + 30 * sin(PI / 180 * i)), RGB(255, i, i));
+                }
+                break;}
+            case 5:{
+                for (int i = 0; i < 360; i = i + 10) {
+                    drawLineDDA(100, 50, (100 + 30 * cos(PI / 180 * i)), (50 + 30 * sin(PI / 180 * i)), RGB(i, 255, i));
+                }
+                break;}
+            case 6:{
+                circle_bresenham(160, 50, 25, RGB(0, 0, 255));
+                break;}
+            case 7:{
+                draw_polygon(polygon);
+                Fill(50, 50, RGB(227, 255, 70), RGB(253, 215, 215));
+                break;}
+            case 8:{
+                draw_polygon(polygon);
+                fill_seed(50, 50, RGB(227, 255, 70), RGB(253, 215, 215));
+                break;}
+            case 9:{break;}
 
-    }
+        }
+
     std::cin.get();
+
     std::cin.get();
     return 0;
 }
