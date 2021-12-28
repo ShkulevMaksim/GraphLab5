@@ -1,5 +1,5 @@
 #include <windows.h>
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 #include <cmath>
 #include <stack>
@@ -246,6 +246,12 @@ void draw_polygon(int mnogo[2][6]) {
     drawLineDDA(mnogo[0][0], mnogo[1][0], mnogo[0][5], mnogo[1][5], RGB(227, 255, 70));
 }
 
+void draw_polygon(int mnogo[2][3]) {
+    for (int i = 0; i < 2; i++) {
+        drawLineDDA(mnogo[0][i], mnogo[1][i], mnogo[0][i + 1], mnogo[1][i + 1], RGB(227, 255, 70));
+    }
+    drawLineDDA(mnogo[0][0], mnogo[1][0], mnogo[0][5], mnogo[1][5], RGB(227, 255, 70));
+}
 COLORREF getPixel(int x, int y) {
     return colorMass[x][y];
     int xx = (x - 1) * grid_size - 1;
@@ -370,10 +376,12 @@ int main()
     int polygon[2][6] = {50,80,80,50,20,20,
                          0,30,80,100,80,30 };
 
+    int poly2[2][3]={50,70,30,10,30,30};
+
     draw_grid(grid_width, grid_height, grid_size);
     SetConsoleCursorPosition(handleWindow, { 0,static_cast<short>(grid_size * grid_height / 16) });
 
-    std::cout << "Choose an option:" << '\n'
+   std::cout << "Choose an option:" << '\n'
     <<"1. Grid" << '\n'
     <<"2. Triangle"<< '\n'
     <<"3. DDA "<< '\n'
@@ -423,6 +431,9 @@ int main()
                     break;}
                 case 8:{
                     draw_polygon(polygon);
+                    draw_polygon(poly2);
+                    std::cin.get();
+                    std::cin.get();
                     fill_seed(50, 50, RGB(227, 255, 70), RGB(253, 215, 215));
                     break;}
                 case 9:{a=false;}
